@@ -21,7 +21,7 @@ As the system grows, selected modules may be extracted into independent services
 
 Planned services:
 
-- Identity
-- Game
-- Character
-- Realtime
+- Identity // кто пользователь и имеет ли он доступ
+- Game // что происходит в игре и игровые правила
+- Character // состояние персонажа
+- Realtime // доставка изменений игрокам в реальном времени
