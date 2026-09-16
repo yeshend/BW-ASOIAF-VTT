@@ -43,8 +43,8 @@ func isSuccess(value int, shade Shade) bool {
 
 func countSuccesses(dice []int, shade Shade) int {
 	passed := 0
-	for i := 0; i < len(dice); i++ {
-		if isSuccess(dice[i], shade) {
+	for _, v := range dice {
+		if isSuccess(v, shade) {
 			passed++
 		}
 	}
@@ -52,9 +52,9 @@ func countSuccesses(dice []int, shade Shade) int {
 }
 
 func Roll(r RollInput) RollResult {
-	result := new(RollResult)
+	result := RollResult{}
 	result.Dice = rollDice(r.Skill)
 	result.Successes = countSuccesses(result.Dice, r.Shade)
 	result.Passed = result.Successes >= r.Obstacle
-	return *result
+	return result
 }
