@@ -43,3 +43,39 @@ func TestIsSuccess(t *testing.T) {
 		})
 	}
 }
+
+func TestCountSuccesses(t *testing.T) {
+	tests := []struct {
+		name     string
+		values   []int
+		shade    Shade
+		expected int
+	}{
+		// Black Shade (4+)
+		{name: "Black empty", values: []int{}, shade: Black, expected: 0},
+		{name: "Black 0 in 3", values: []int{1, 2, 3}, shade: Black, expected: 0},
+		{name: "Black 3 in 3", values: []int{4, 5, 6}, shade: Black, expected: 3},
+		{name: "Black 2 in 4", values: []int{1, 4, 2, 6}, shade: Black, expected: 2},
+
+		// Gray Shade (3+)
+		{name: "Gray empty", values: []int{}, shade: Gray, expected: 0},
+		{name: "Gray 1 in 3", values: []int{1, 2, 3}, shade: Gray, expected: 1},
+		{name: "Gray 3 in 3", values: []int{4, 5, 6}, shade: Gray, expected: 3},
+		{name: "Gray 2 in 4", values: []int{1, 4, 2, 6}, shade: Gray, expected: 2},
+
+		// White Shade (2+)
+		{name: "White empty", values: []int{}, shade: White, expected: 0},
+		{name: "White 2 in 3", values: []int{1, 2, 3}, shade: White, expected: 2},
+		{name: "White 3 in 3", values: []int{4, 5, 6}, shade: White, expected: 3},
+		{name: "White 3 in 4", values: []int{1, 4, 2, 6}, shade: White, expected: 3},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			actual := countSuccesses(test.values, test.shade)
+			if actual != test.expected {
+				t.Errorf("Expected: %v, got: %v", test.expected, actual)
+			}
+		})
+	}
+}
